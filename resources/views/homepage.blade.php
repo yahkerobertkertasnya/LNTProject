@@ -53,7 +53,7 @@
                         <td>{{ $kar->KaryawanPhoneNo }}</td>
 
                         <td class="col-sm-2 text-center">
-                            <button type="button" value="{{$kar->id}}" class="btn btn-outline-info updateButton" data-bs-toggle="modal" data-bs-target="#updateEmployeeModal">
+                            <button type="button" value="{{$kar->id}}~{{ $kar->KaryawanName }}~{{ $kar->KaryawanAge }}~{{ $kar->KaryawanAddress }}~{{ $kar->KaryawanPhoneNo }}" class="btn btn-outline-info updateButton" data-bs-toggle="modal" data-bs-target="#updateEmployeeModal">
                                 Update
                             </button>
                         </td>
@@ -130,22 +130,22 @@
                         <div class="mb-3">
                             <input type="hidden" id="updateEmployeeId" name="EmployeeId">
                             <label for="employee-address" class="form-label text-start">Employee Name</label>
-                            <input type="text" class="form-control border border-dark border-1" name="EmployeeName"
+                            <input type="text" id="updateEmployeeName" class="form-control border border-dark border-1" name="EmployeeName"
                                    placeholder="Enter employee's name">
                         </div>
                         <div class="mb-3">
                             <label for="employee-age" class="form-label">Employee Age</label>
-                            <input type="number" class="form-control border border-dark border-1" name="EmployeeAge"
+                            <input type="number" id="updateEmployeeAge" class="form-control border border-dark border-1" name="EmployeeAge"
                                    placeholder="Enter employee's age">
                         </div>
                         <div class="mb-3">
                             <label for="employee-address" class="form-label">Employee Address</label>
-                            <input type="text" class="form-control border border-dark border-1" name="EmployeeAddress"
+                            <input type="text" id="updateEmployeeAddress" class="form-control border border-dark border-1" name="EmployeeAddress"
                                    placeholder="Enter employee's address">
                         </div>
                         <div class="mb-3">
                             <label for="employee-phone-number" class="form-label">Employee Phone Number</label>
-                            <input type="text" class="form-control border border-dark border-1" name="EmployeePhoneNumber"
+                            <input type="text" id="updateEmployeePhoneNumber" class="form-control border border-dark border-1" name="EmployeePhoneNumber"
                                    placeholder="Enter employee's phone number">
                         </div>
                         @if ($errors->any())
@@ -219,7 +219,13 @@
         });
         $(".updateButton").click(function(e) {
             e.preventDefault();
-            $("#updateEmployeeId").val($(this).val());
+
+            var values = $(this).val().toString().split("~");
+            $("#updateEmployeeId").val(values[0]);
+            $("#updateEmployeeName").val(values[1]);
+            $("#updateEmployeeAge").val(values[2]);
+            $("#updateEmployeeAddress").val(values[3]);
+            $("#updateEmployeePhoneNumber").val(values[4]);
         });
     });
 </script>
